@@ -8,13 +8,15 @@
     "discord.js": "^12.2.0"
   },
   "devDependencies": {
+    "ava": "^3.8.2",
+    "esm": "^3.2.25",
     "rollup": "^2.15.0",
     "rollup-plugin-terser": "^6.1.0"
   },
   "scripts": {
     "build": "rollup --config rollup.config.js src/index.js --file dist/bundle.js --format cjs",
     "start": "npm run build && node dist/bundle.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,11 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rav-pradhan/dnd-jukebox/issues"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
   },
   "homepage": "https://github.com/rav-pradhan/dnd-jukebox#readme"
 }
