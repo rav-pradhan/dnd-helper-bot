@@ -1,4 +1,4 @@
-module.exports = {
+export const themes = {
   battle: ["https://www.youtube.com/watch?v=lAGm9MTyRJ8"],
   boss: [    "https://www.youtube.com/watch?v=7sGMKm1Ozfw",
   "https://www.youtube.com/watch?v=ZIF-VbKfnxc"],
