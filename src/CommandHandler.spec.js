@@ -1,10 +1,10 @@
 import CommandHandler from './CommandHandler'
 import Message from './Message'
-import Channel from './Channel'
+import ChannelInteractor from './ChannelInteractor'
 
-jest.mock('./Channel')
+jest.mock('./ChannelInteractor')
 
-Channel.mockImplementation(() => {
+ChannelInteractor.mockImplementation(() => {
   return {
     respondInChatWith: jest.fn(),
     respondInChatWithInvalidCommand: jest.fn(),
@@ -13,56 +13,60 @@ Channel.mockImplementation(() => {
 })
 
 describe('Ping Command Handler', () => {
-  let mockCommandHandler
-  let mockChannel
+  let testCommandHandler
+  let mockChannelInteractor
 
   beforeEach(() => {
-    Channel.mockClear()
-    mockCommandHandler = new CommandHandler('!')
-    mockChannel = new Channel()
+    ChannelInteractor.mockClear()
+    testCommandHandler = new CommandHandler('!')
+    mockChannelInteractor = new ChannelInteractor()
   })
 
   test('that the message !ping gets a response of pong', async () => {
     const text = '!ping'
     const expectedResponse = 'pong!'
-    const message = new Message(mockChannel, text)
+    const message = new Message(mockChannelInteractor, text)
 
-    await mockCommandHandler.handleMessage(message)
-    expect(mockChannel.respondInChatWith).toBeCalledTimes(1)
-    expect(mockChannel.respondInChatWith).toBeCalledWith(expectedResponse)
+    await testCommandHandler.handleMessage(message)
+    expect(mockChannelInteractor.respondInChatWith).toBeCalledTimes(1)
+    expect(mockChannelInteractor.respondInChatWith).toBeCalledWith(
+      expectedResponse
+    )
   })
 
   test('that the bot does not send a response if the message is not a valid command', async () => {
     const text = 'Hello world'
-    const message = new Message(mockChannel, text)
+    const message = new Message(mockChannelInteractor, text)
 
-    await mockCommandHandler.handleMessage(message)
-    expect(mockChannel.respondInChatWithInvalidCommand).toBeCalledTimes(0)
+    await testCommandHandler.handleMessage(message)
+    expect(
+      mockChannelInteractor.respondInChatWithInvalidCommand
+    ).toBeCalledTimes(0)
   })
 })
 
 describe('Play Command Handler', () => {
-  let mockCommandHandler
-  let mockChannel
+  let testCommandHandler
+  let mockChannelInteractor
 
   beforeEach(() => {
-    Channel.mockClear()
-    mockCommandHandler = new CommandHandler('!')
-    mockChannel = new Channel()
+    ChannelInteractor.mockClear()
+    testCommandHandler = new CommandHandler('!')
+    mockChannelInteractor = new ChannelInteractor()
   })
 
   test('that the bot sends an error if an invalid theme is requested in the !play command', async () => {
     const text = '!play test'
-    const message = new Message(mockChannel, text)
+    const message = new Message(mockChannelInteractor, text)
 
-    await mockCommandHandler.handleMessage(message)
-    expect(mockChannel.respondInChatWith).toBeCalledTimes(1)
+    await testCommandHandler.handleMessage(message)
+    expect(mockChannelInteractor.respondInChatWith).toBeCalledTimes(1)
   })
   test('that bot calls for the play method in Channel when a valid theme is requested', async () => {
     const text = '!play ambientCave'
-    const message = new Message(mockChannel, text)
+    const message = new Message(mockChannelInteractor, text)
 
-    await mockCommandHandler.handleMessage(message)
-    expect(mockChannel.play).toBeCalledTimes(1)
+    await testCommandHandler.handleMessage(message)
+    expect(mockChannelInteractor.play).toBeCalledTimes(1)
   })
 })

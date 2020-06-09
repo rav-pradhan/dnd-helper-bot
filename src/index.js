@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import { config } from '../config'
 import CommandHandler from './CommandHandler'
 import Message from './Message'
-import Channel from './Channel'
+import ChannelInteractor from './ChannelInteractor'
 
 dotenv.config()
 const client = new Discord.Client()
@@ -17,11 +17,11 @@ client.once('ready', () => {
 
 client.on('message', async message => {
   if (message.author.bot) return
-  messageOriginChannel = new Channel(
+  originChannelInteractor = new ChannelInteractor(
     message.channel,
     message.member.voice.channel
   )
-  const messageData = new Message(messageOriginChannel, message.content)
+  const messageData = new Message(originChannelInteractor, message.content)
   handler.handleMessage(messageData)
 })
 

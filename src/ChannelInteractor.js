@@ -1,4 +1,4 @@
-export default class Channel {
+export default class ChannelInteractor {
   constructor(channel, voiceChannel) {
     this.originChannel = channel
     this.voiceChannel = voiceChannel
