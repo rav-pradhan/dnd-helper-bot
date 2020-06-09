@@ -9,7 +9,7 @@ import ChannelInteractor from './ChannelInteractor'
 dotenv.config()
 const client = new Discord.Client()
 let handler
-let messageOriginChannel
+let originChannelInteractor
 
 client.once('ready', () => {
   handler = new CommandHandler(config.prefix)
