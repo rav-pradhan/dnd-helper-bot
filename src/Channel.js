@@ -1,13 +1,18 @@
 export default class Channel {
-    constructor(channel) {
-        this.originChannel = channel;
-    }
+  constructor(channel, voiceChannel) {
+    this.originChannel = channel
+    this.voiceChannel = voiceChannel
+  }
 
-    respondInChatWith(message) {
-        this.originChannel.send(message)
-    }
+  play(track) {
+    return track
+  }
 
-    responseInChatWithInvalidCommand(attemptedCommand) {
-        this.originChannel.send(`The command ${attemptedCommand} is not valid.`)
-    }
+  respondInChatWith(message) {
+    this.originChannel.send(message)
+  }
+
+  respondInChatWithInvalidCommand(attemptedCommand) {
+    this.originChannel.send(`The command ${attemptedCommand} is not valid.`)
+  }
 }
