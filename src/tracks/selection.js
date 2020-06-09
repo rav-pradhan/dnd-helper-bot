@@ -5,5 +5,6 @@ export const tracks = {
     'https://www.youtube.com/watch?v=ZIF-VbKfnxc'
   ],
   town: ['https://www.youtube.com/watch?v=xu2pESvXcmM'],
-  ambientCave: ['https://www.youtube.com/watch?v=E72yDpAfrgY']
+  ambientCave: ['https://www.youtube.com/watch?v=E72yDpAfrgY'],
+  victory: ['https://www.youtube.com/watch?v=-YCN-a0NsNk']
 }
