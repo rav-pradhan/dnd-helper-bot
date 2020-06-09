@@ -52,10 +52,6 @@ export default class CommandHandler {
     }
   }
 
-  flagForInvalidCommand(channel, command) {
-    channel.respondInChatWithInvalidCommand(command)
-  }
-
   sendMessage(channel, message) {
     channel.respondInChatWith(message)
   }
