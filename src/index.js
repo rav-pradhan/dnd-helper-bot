@@ -8,16 +8,18 @@ import Channel from './Channel'
 
 dotenv.config();
 const client = new Discord.Client();
-let commandHandler = new CommandHandler(config.prefix)
-const general = new Channel() 
+let handler;
+let messageOriginChannel; 
 
 client.once("ready", () => {
-  console.log("D&D Jukebox is now running");
+  handler = new CommandHandler(config.prefix)
 });
 
 client.on("message", async message => {
   if (message.author.bot) return;
-  const message = new Message( message)
+  messageOriginChannel = new Channel(message.channel);
+  const messageData = new Message(messageOriginChannel, message.content)
+  handler.handleMessage(messageData);
 })
 
 client.login(process.env.ACCESS_TOKEN);

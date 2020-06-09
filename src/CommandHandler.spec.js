@@ -6,7 +6,8 @@ jest.mock('./Channel')
 
 Channel.mockImplementation(() => {
   return {
-    conveyMessage: jest.fn()
+    respondInChatWith: jest.fn(),
+    respondInChatWithInvalidCommand: jest.fn()
   }
 })
 
@@ -16,29 +17,25 @@ describe('Command Handler', () => {
 
   beforeEach(() => {
     Channel.mockClear();
-
-    mockCommandHandler = new CommandHandler();
+    mockCommandHandler = new CommandHandler('!');
     mockChannel = new Channel();
   })
 
-  test('that the message !ping gets a response of pong', () => {
+  test('that the message !ping gets a response of pong', async () => {
     const text = "!ping";
-    const expectedResponse = "pong";
-
+    const expectedResponse = "pong!";
     const message = new Message(mockChannel, text);
 
-    mockCommandHandler.handleMessage(message);
-
-    expect(mockChannel.conveyMessage).toBeCalledTimes(1)
-    expect(mockChannel.conveyMessage).toBeCalledWith(expectedResponse);
+    await mockCommandHandler.handleMessage(message);
+    expect(mockChannel.respondInChatWith).toBeCalledTimes(1)
+    expect(mockChannel.respondInChatWith).toBeCalledWith(expectedResponse);
   })
 
-  test('that the bot does not send a response if the message is not a valid command', () => {
+  test('that the bot does not send a response if the message is not a valid command', async () => {
     const text = "Hello world"
     const message = new Message(mockChannel, text)
 
-    mockCommandHandler.handleMessage(message)
-
-    expect(mockChannel.conveyMessage).toBeCalledTimes(0)
+    await mockCommandHandler.handleMessage(message)
+    expect(mockChannel.respondInChatWithInvalidCommand).toBeCalledTimes(1)
   })
 })
