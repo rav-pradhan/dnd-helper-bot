@@ -7,7 +7,6 @@ jest.mock('./ChannelInteractor')
 ChannelInteractor.mockImplementation(() => {
   return {
     respondInChatWith: jest.fn(),
-    respondInChatWithInvalidCommand: jest.fn(),
     play: jest.fn()
   }
 })
@@ -40,7 +39,7 @@ describe('Ping Command Handler', () => {
 
     await testCommandHandler.handleMessage(message)
     expect(
-      mockChannelInteractor.respondInChatWithInvalidCommand
+      mockChannelInteractor.respondInChatWith
     ).toBeCalledTimes(0)
   })
 })
