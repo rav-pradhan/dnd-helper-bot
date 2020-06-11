@@ -8,31 +8,30 @@ const INVALID_THEME_MESSAGE =
   'Please enter a valid theme with the !play command: battle, boss, town, ambientCave'
 
 export default class CommandHandler {
-  constructor(prefix) {
+  constructor(prefix, presenter) {
     this.prefix = prefix
   }
 
-  async handleMessage(message) {
-    const { channel, text } = await message
-    const { command, parameters } = this.extractArgumentsFromText(text)
-    if (this.startsWithPrefix(text)) {
-      await this.delegateCommands(channel, command, parameters)
+  async handleMessage(message, presenter) {
+    const { command, parameters } = this.extractArgumentsFromText(message)
+    if (this.startsWithPrefix(message)) {
+      await this.delegateCommands(command, parameters, presenter)
     }
   }
 
-  async delegateCommands(channel, command, parameters) {
+  async delegateCommands(command, parameters, presenter) {
     switch (command) {
       case 'ping':
-        channel.respondInChatWith('pong!')
+        presenter.respondInChatWith('pong!')
         break
       case 'play':
         const track = await selectTrack(tracks, parameters[0])
         track
-          ? channel.play(track)
-          : channel.respondInChatWith(INVALID_THEME_MESSAGE)
+          ? presenter.play(track)
+          : presenter.respondInChatWith(INVALID_THEME_MESSAGE)
         break
       default:
-        channel.respondInChatWith(HELP_MESSAGE)
+        presenter.respondInChatWith(HELP_MESSAGE)
     }
   }
 
