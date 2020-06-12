@@ -1,7 +1,7 @@
-import {spellHandler} from './commands/spellHandler'
-import selectTrack from './commands/selectTrack'
+import {spellHandler} from './modules/spellHandler'
+import selectTrack from './modules/selectTrack'
 import {tracks} from './tracks/selection'
-import messageResponses from "./commands/messageResponses";
+import messageResponses from "./modules/messageResponses";
 
 export default class CommandRouter {
     constructor(prefix) {
@@ -26,14 +26,17 @@ export default class CommandRouter {
                     : presenter.respondInChatWith(messageResponses.INVALID_THEME_MESSAGE)
             case 'spell':
                 if (spellHandler.isValidSlug(parameters.length)) {
-                    const spellSlug = await parameters[0]
-                    const spellDetails = await spellHandler.fetchSpellDetails(spellSlug)
-                    console.log("SPELL DETAILS", spellDetails)
-                    presenter.respondInChatWith(spellDetails)
+                    let spellData;
+                    try {
+                        const spellSlug = await parameters[0]
+                        spellData = await spellHandler.fetchSpellDetails(spellSlug)
+                        return presenter.respondWithEmbeddedSpellFormat(spellData)
+                    } catch(error) {
+                        return presenter.respondInChatWith(messageResponses.ERROR_FINDING_SPELL)
+                    }
                 } else {
                     return presenter.respondInChatWith(messageResponses.NO_SPELL_PROVIDED)
                 }
-                break
             default:
                 return presenter.respondInChatWith(messageResponses.HELP_MESSAGE)
         }

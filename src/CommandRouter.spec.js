@@ -1,7 +1,7 @@
 import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
-import {testSpellData, failedTestSpellData} from "./commands/testData";
-import messageResponses from "./commands/messageResponses";
+import {testSpellData, failedTestSpellData} from "./modules/testData";
+import messageResponses from "./modules/messageResponses";
 import axios from 'axios'
 
 jest.mock('axios')
@@ -74,19 +74,18 @@ describe('Command Handlers', () => {
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.NO_SPELL_PROVIDED)
         })
-        // test('that the bot returns a response on successful call', async () => {
-        //     const text = '!spell magic-missile'
-        //     axios.get.mockImplementationOnce(() => Promise.resolve(testSpellData));
-        //     await mockCommandHandler.handleMessage(text, mockChannelPresenter)
-        //     expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
-        // })
+        test('that the bot returns a response on successful call', async () => {
+            const text = '!spell magic-missile'
+            axios.get.mockImplementationOnce(() => Promise.resolve(testSpellData));
+            await mockCommandHandler.handleMessage(text, mockChannelPresenter)
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
+        })
         test('that the bot returns a response on an unsuccessful call', async () => {
             const text = '!spell deliberately-non-existent-spell'
-            const expectedFailureResponse = 'An error occurred: Status Code 404 - Not found'
             axios.get.mockRejectedValueOnce(failedTestSpellData);
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
-            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(expectedFailureResponse)
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.ERROR_FINDING_SPELL)
         })
     })
 })

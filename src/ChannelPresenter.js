@@ -1,4 +1,5 @@
 import ytdl from 'ytdl-core'
+import * as Discord from "discord.js";
 
 export default class ChannelPresenter {
     constructor(channel, voiceChannel, bot) {
@@ -18,11 +19,23 @@ export default class ChannelPresenter {
         });
     }
 
-    stopPlaying() {
-        this.bot
-    }
-
     respondInChatWith(message) {
         this.originChannel.send(message)
+    }
+
+    respondWithEmbeddedSpellFormat(spellData) {
+        const spellMessage = new Discord.MessageEmbed()
+        spellMessage
+            .setColor('#0099ff')
+            .setTitle(spellData.name)
+            .setDescription(spellData.desc)
+            .addFields(
+                {name: 'School', value: spellData.school, inline: true},
+                {name: 'Range', value: spellData.range, inline: true},
+                {name: 'Cast Time', value: spellData.casting_time, inline: true},
+                {name: 'Spell Level', value: spellData.level_int, inline: true},
+            )
+            .setTimestamp()
+        return this.originChannel.send(spellMessage)
     }
 }
