@@ -2,7 +2,7 @@ require('dotenv').config()
 import * as Discord from 'discord.js'
 import dotenv from 'dotenv'
 import {config} from '../config'
-import CommandHandler from './CommandHandler'
+import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
 
 dotenv.config()
@@ -19,8 +19,9 @@ client.on('message', async message => {
     originChannelPresenter = new ChannelPresenter(
         message.channel,
         message.member.voice.channel,
+        message.guild.me
     )
-    handler = new CommandHandler(config.prefix)
+    handler = new CommandRouter(config.PREFIX)
     await handler.handleMessage(message.content, originChannelPresenter)
 })
 

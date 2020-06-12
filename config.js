@@ -1,3 +1,4 @@
 export const config = {
-    prefix: "!"
+    PREFIX: "!",
+    API_URL: "https://api.open5e.com"
 }
