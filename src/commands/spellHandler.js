@@ -1,9 +1,11 @@
 import {config} from '../../config'
 import axios from 'axios'
+import * as Discord from 'discord.js';
 
 const spellHandler = {
     async fetchSpellDetails(spellSlug) {
         try {
+
             const data = await axios.get(`${config.API_URL}/spells/${spellSlug}`, {data: null})
             return await this.formatResponse(data.data)
         } catch (error) {
@@ -12,16 +14,17 @@ const spellHandler = {
     },
 
     formatResponse(data) {
-        const response =
-        `
-            Spell: ${data.name}
-            School: ${data.school}
-            Description: ${data.desc}
-            Range: ${data.range}
-            Cast Time: ${data.casting_time}
-            Spell Level: ${data.level_int}
-        `
-        return response
+        return new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle(data.name)
+            .setDescription(data.desc)
+            .addFields(
+                {name: 'School', value: data.school},
+                {name: 'Range', value: data.range, inline: true},
+                {name: 'Cast Time', value: data.casting_time, inline: true},
+                {name: 'Spell Level', value: data.level_int, inline: true},
+            )
+            .setTimestamp()
     },
 
     isValidSlug(parametersLength) {
