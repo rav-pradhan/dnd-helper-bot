@@ -1,6 +1,7 @@
 import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
 import spellHandler from "./commands/spellHandler";
+import messageResponses from "./commands/messageResponses";
 
 jest.mock('./ChannelPresenter')
 ChannelPresenter.mockImplementation(() => {
@@ -24,7 +25,6 @@ describe('Command Handlers', () => {
         test('that the message !ping gets a response of pong', async () => {
             const text = '!ping'
             const expectedResponse = 'pong!'
-
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(
@@ -37,6 +37,14 @@ describe('Command Handlers', () => {
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(0)
         })
+
+        test('that the bot responds if an invalid command is entered', async () => {
+            const text = '!Hello world'
+            await mockCommandHandler.handleMessage(text, mockChannelPresenter)
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.HELP_MESSAGE)
+        })
+
     })
 
     describe('Play Command Handler', () => {
@@ -55,24 +63,21 @@ describe('Command Handlers', () => {
     describe('Spell Details command handler', () => {
         test('that the bot sends an error if no parameter is provided in the !spell command', async () => {
             const text = '!spell'
-            const expectedResponse = "Please include a slugified version of the spell name, e.g., Acid Arrow => acid-arrow, or Arcanist's Magic Aura => arcanists-magic-aura"
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
-            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(expectedResponse)
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.NO_SPELL_PROVIDED)
         })
         test('that the bot sends an error if an invalid parameter is provided in the !spell command', async () => {
             const text = '!spell Hideous Laughter'
-            const expectedResponse = "Please include a slugified version of the spell name, e.g., Acid Arrow => acid-arrow, or Arcanist's Magic Aura => arcanists-magic-aura"
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
-            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(expectedResponse)
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.NO_SPELL_PROVIDED)
         })
         test('that the bot sends an error if an invalid parameter is provided in the !spell command', async () => {
             const text = '!spell Hideous Laughter'
-            const expectedResponse = "Please include a slugified version of the spell name, e.g., Acid Arrow => acid-arrow, or Arcanist's Magic Aura => arcanists-magic-aura"
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
-            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(expectedResponse)
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.NO_SPELL_PROVIDED)
         })
         test('that the bot makes a call to the API when a valid slug is provided', async () => {
             const spellSpy = jest.spyOn(spellHandler, 'fetchSpellDetails')

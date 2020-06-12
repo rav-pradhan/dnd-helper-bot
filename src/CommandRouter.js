@@ -1,14 +1,7 @@
 import spellHandler from './commands/spellHandler'
 import selectTrack from './commands/selectTrack'
 import {tracks} from './tracks/selection'
-
-const HELP_MESSAGE =
-    'Try any of the following commands: !play [theme], !ping'
-
-const INVALID_THEME_MESSAGE =
-    'Please enter a valid theme with the !play command: battle, boss, town, forest, ambientCave, ambientForest, victory'
-
-const NO_SPELL_PROVIDED = "Please include a slugified version of the spell name, e.g., Acid Arrow => acid-arrow, or Arcanist's Magic Aura => arcanists-magic-aura"
+import messageResponses from "./commands/messageResponses";
 
 export default class CommandRouter {
     constructor(prefix) {
@@ -30,18 +23,17 @@ export default class CommandRouter {
                 const track = await selectTrack(tracks, parameters[0])
                 return track
                     ? presenter.play(track)
-                    : presenter.respondInChatWith(INVALID_THEME_MESSAGE)
+                    : presenter.respondInChatWith(messageResponses.INVALID_THEME_MESSAGE)
             case 'spell':
                 if (spellHandler.isValidSlug(parameters.length)) {
                     const spellSlug = await parameters[0]
                     const spellDetails = await spellHandler.fetchSpellDetails(spellSlug)
                 } else {
-                    return presenter.respondInChatWith(NO_SPELL_PROVIDED)
+                    return presenter.respondInChatWith(messageResponses.NO_SPELL_PROVIDED)
                 }
                 break
             default:
-                console.log("DEFAULT")
-                return presenter.respondInChatWith(HELP_MESSAGE)
+                return presenter.respondInChatWith(messageResponses.HELP_MESSAGE)
         }
     }
 
