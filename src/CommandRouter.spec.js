@@ -1,7 +1,10 @@
 import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
-import spellHandler from "./commands/spellHandler";
+import {testSpellData, failedTestSpellData} from "./commands/testData";
 import messageResponses from "./commands/messageResponses";
+import axios from 'axios'
+
+jest.mock('axios')
 
 jest.mock('./ChannelPresenter')
 ChannelPresenter.mockImplementation(() => {
@@ -31,13 +34,11 @@ describe('Command Handlers', () => {
                 expectedResponse
             )
         })
-
         test('that the bot does not send a response if the message is not a valid command', async () => {
             const text = 'Hello world'
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(0)
         })
-
         test('that the bot responds if an invalid command is entered', async () => {
             const text = '!Hello world'
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
@@ -73,17 +74,19 @@ describe('Command Handlers', () => {
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.NO_SPELL_PROVIDED)
         })
-        test('that the bot sends an error if an invalid parameter is provided in the !spell command', async () => {
-            const text = '!spell Hideous Laughter'
+        // test('that the bot returns a response on successful call', async () => {
+        //     const text = '!spell magic-missile'
+        //     axios.get.mockImplementationOnce(() => Promise.resolve(testSpellData));
+        //     await mockCommandHandler.handleMessage(text, mockChannelPresenter)
+        //     expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
+        // })
+        test('that the bot returns a response on an unsuccessful call', async () => {
+            const text = '!spell deliberately-non-existent-spell'
+            const expectedFailureResponse = 'An error occurred: Status Code 404 - Not found'
+            axios.get.mockRejectedValueOnce(failedTestSpellData);
             await mockCommandHandler.handleMessage(text, mockChannelPresenter)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
-            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.NO_SPELL_PROVIDED)
-        })
-        test('that the bot makes a call to the API when a valid slug is provided', async () => {
-            const spellSpy = jest.spyOn(spellHandler, 'fetchSpellDetails')
-            const text = '!spell magic-missile'
-            await mockCommandHandler.handleMessage(text, mockChannelPresenter)
-            expect(spellSpy).toHaveBeenCalled()
+            expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(expectedFailureResponse)
         })
     })
 })

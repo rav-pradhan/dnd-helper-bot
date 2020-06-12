@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for dnd-jukebox/src/tracks/selection.js</title>
+    <title>Code coverage report for dnd-jukebox/src/commands/testData.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">dnd-jukebox/src/tracks</a> selection.js</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">dnd-jukebox/src/commands</a> testData.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -70,7 +70,23 @@
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -83,20 +99,52 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const tracks = {
-  ambientCave: ['https://www.youtube.com/watch?v=E72yDpAfrgY'],
-  ambientForest: ['https://youtu.be/d0tU18Ybcvk'],
-  forest: ['https://www.youtube.com/watch?v=83X7bNjkUWs', 'https://www.youtube.com/watch?v=DiCGgN4gJ8s'],
-  battle: ['https://www.youtube.com/watch?v=lAGm9MTyRJ8'],
-  rob: ['https://www.youtube.com/watch?v=dIiZ3vvZ78s'],
-  boss: [
-    'https://www.youtube.com/watch?v=7sGMKm1Ozfw',
-    'https://www.youtube.com/watch?v=ZIF-VbKfnxc'
-  ],
-  town: ['https://www.youtube.com/watch?v=xu2pESvXcmM'],
-  victory: ['https://www.youtube.com/watch?v=-YCN-a0NsNk']
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const testSpellData = {
+    "slug": "magic-missile",
+    "name": "Magic Missile",
+    "desc": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.",
+    "higher_level": "When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.",
+    "page": "phb 257",
+    "range": "120 feet",
+    "components": "V, S",
+    "material": "",
+    "ritual": "no",
+    "duration": "Instantaneous",
+    "concentration": "no",
+    "casting_time": "1 action",
+    "level": "1st-level",
+    "level_int": 1,
+    "school": "Evocation",
+    "dnd_class": "Sorcerer, Wizard",
+    "archetype": "",
+    "circles": "",
+    "document__slug": "wotc-srd",
+    "document__title": "Systems Reference Document",
+    "document__license_url": "http://open5e.com/legal"
 }
-&nbsp;</pre></td></tr></table></pre>
+&nbsp;
+export const failedTestSpellData = {
+    response: {
+        status: 404,
+        statusText: 'Not found'
+    }
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

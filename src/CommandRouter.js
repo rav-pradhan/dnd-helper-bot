@@ -1,4 +1,4 @@
-import spellHandler from './commands/spellHandler'
+import {spellHandler} from './commands/spellHandler'
 import selectTrack from './commands/selectTrack'
 import {tracks} from './tracks/selection'
 import messageResponses from "./commands/messageResponses";
@@ -28,6 +28,8 @@ export default class CommandRouter {
                 if (spellHandler.isValidSlug(parameters.length)) {
                     const spellSlug = await parameters[0]
                     const spellDetails = await spellHandler.fetchSpellDetails(spellSlug)
+                    console.log("SPELL DETAILS", spellDetails)
+                    presenter.respondInChatWith(spellDetails)
                 } else {
                     return presenter.respondInChatWith(messageResponses.NO_SPELL_PROVIDED)
                 }
