@@ -21,5 +21,12 @@ export const tracks = {
     broadsteppes: ['https://youtu.be/_52K0E_gNY0'],
     seaside: ['https://youtu.be/mMSa-3xSKk0'],
     mansion: ['https://youtu.be/LgtRqwfJGbI'],
-
+    sneaking: ['https://youtu.be/MI2wq39BPFo'],
+    showdown: ['https://youtu.be/zN9IrXQ5Yuk'],
+    conflict: ['https://youtu.be/EspwQ6Phw0g'],
+    bells: ['https://youtu.be/mu1hYDrJNuM'],
+    triumph: ['https://youtu.be/uz_sxVDuCV8'],
+    epilogue: ['https://youtu.be/jiwuQ6UHMQg'],
+    me2: ['https://www.youtube.com/watch?v=eILrZivDaVA'],
+    death: ['https://youtu.be/NxdlNfM8cIM?t=2']
 }
