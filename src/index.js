@@ -1,27 +1,32 @@
-require('dotenv').config()
 import * as Discord from 'discord.js'
 import dotenv from 'dotenv'
 import {config} from '../config'
 import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
+import Jukebox from './Jukebox'
 
 dotenv.config()
 const client = new Discord.Client()
+
 let handler
 let originChannelPresenter
+let playlist = {}
 
-client.once('ready', () => {
-    console.log("Beep boop beep. D&D Jukebox now taking requests.")
+client.once('ready', async () => {
+    playlist = await parsePlaylist(fileLocation)
+    console.log("D&D Helper ready for service.")
 })
 
 client.on('message', async message => {
     if (message.author.bot) return
+
     originChannelPresenter = new ChannelPresenter(
         message.channel,
         message.member.voice.channel,
         message.guild.me
     )
-    handler = new CommandRouter(config.PREFIX)
+    Playlist = new Jukebox(playlist)
+    handler = new CommandRouter(config.PREFIX, Playlist)
     await handler.handleMessage(message.content, originChannelPresenter)
 })
 

@@ -1,7 +1,7 @@
 {
   "name": "dnd-jukebox",
   "version": "1.0.0",
-  "description": "A Discord bot that will play D&D themed music",
+  "description": "A Discord D&D 5e helper bot, using the open5e API",
   "main": "index.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",

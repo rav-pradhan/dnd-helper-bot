@@ -1,11 +1,10 @@
 import {spellHandler} from './modules/spellHandler'
-import selectTrack from './modules/selectTrack'
-import {tracks} from './tracks/selection'
 import messageResponses from "./modules/messageResponses";
 
 export default class CommandRouter {
-    constructor(prefix) {
+    constructor(prefix, jukebox) {
         this.prefix = prefix
+        this.musicPlayer = jukebox
     }
 
     async handleMessage(message, presenter) {
@@ -20,7 +19,7 @@ export default class CommandRouter {
             case 'ping':
                 return presenter.respondInChatWith('pong!')
             case 'play':
-                const track = await selectTrack(tracks, parameters[0])
+                const track = await this.musicPlayer.selectTrack(parameters[0])
                 return track
                     ? presenter.play(track)
                     : presenter.respondInChatWith(messageResponses.INVALID_THEME_MESSAGE)

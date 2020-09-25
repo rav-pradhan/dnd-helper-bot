@@ -2,6 +2,7 @@ import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
 import {testSpellData, failedTestSpellData} from "./modules/testData";
 import messageResponses from "./modules/messageResponses";
+import Jukebox from './Jukebox'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -17,10 +18,14 @@ ChannelPresenter.mockImplementation(() => {
 describe('Command Handlers', () => {
     let mockChannelPresenter
     let mockCommandHandler
+    let mockJukebox
 
     beforeEach(() => {
         ChannelPresenter.mockClear()
-        mockCommandHandler = new CommandRouter('!')
+        mockJukebox = new Jukebox({
+            ambientCave: ['ambient-cave-track']
+        })
+        mockCommandHandler = new CommandRouter('!', mockJukebox)
         mockChannelPresenter = new ChannelPresenter()
     })
 
