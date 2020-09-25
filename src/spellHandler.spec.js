@@ -1,5 +1,6 @@
 import {spellHandler} from "./spellHandler";
 
+
 describe('validating slugs', () => {
     test('that no arguments passed returns false', () => {
         const got = spellHandler.isValidSlug(null)

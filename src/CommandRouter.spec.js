@@ -1,7 +1,7 @@
 import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
-import {testSpellData, failedTestSpellData} from "./modules/testData";
-import messageResponses from "./modules/messageResponses";
+import {testSpellData, failedTestSpellData} from "./testData";
+import messageResponses from "./responses";
 import Jukebox from './Jukebox'
 import axios from 'axios'
 

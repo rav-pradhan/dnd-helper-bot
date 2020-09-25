@@ -8,7 +8,7 @@ import Jukebox from './Jukebox'
 dotenv.config()
 const client = new Discord.Client()
 
-let handler
+let CommandHandler
 let originChannelPresenter
 let playlist = {}
 
@@ -25,9 +25,10 @@ client.on('message', async message => {
         message.member.voice.channel,
         message.guild.me
     )
+    
     Playlist = new Jukebox(playlist)
-    handler = new CommandRouter(config.PREFIX, Playlist)
-    await handler.handleMessage(message.content, originChannelPresenter)
+    CommandHandler = new CommandRouter(config.PREFIX, Playlist)
+    await CommandHandler.handleMessage(message.content, originChannelPresenter)
 })
 
 client.login(process.env.ACCESS_TOKEN)

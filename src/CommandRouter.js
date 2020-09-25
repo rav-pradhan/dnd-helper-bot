@@ -1,5 +1,5 @@
-import {spellHandler} from './modules/spellHandler'
-import messageResponses from "./modules/messageResponses";
+import {spellHandler} from './spellHandler'
+import messageResponses from "./responses";
 
 export default class CommandRouter {
     constructor(prefix, jukebox) {
