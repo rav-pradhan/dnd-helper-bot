@@ -50,7 +50,6 @@ describe('Command Handlers', () => {
             expect(mockChannelPresenter.respondInChatWith).toBeCalledTimes(1)
             expect(mockChannelPresenter.respondInChatWith).toBeCalledWith(messageResponses.HELP_MESSAGE)
         })
-
     })
 
     describe('Play Command Handler', () => {

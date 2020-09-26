@@ -10,10 +10,10 @@ const client = new Discord.Client()
 
 let CommandHandler
 let originChannelPresenter
-let playlist = {}
+let trackList = {}
 
 client.once('ready', async () => {
-    playlist = await parsePlaylist(fileLocation)
+    trackList = await parsePlaylist(fileLocation)
     console.log("D&D Helper ready for service.")
 })
 
@@ -26,8 +26,8 @@ client.on('message', async message => {
         message.guild.me
     )
     
-    Playlist = new Jukebox(playlist)
-    CommandHandler = new CommandRouter(config.PREFIX, Playlist)
+    const MusicPlayer = new Jukebox(trackList)
+    CommandHandler = new CommandRouter(config.PREFIX, MusicPlayer)
     await CommandHandler.handleMessage(message.content, originChannelPresenter)
 })
 
