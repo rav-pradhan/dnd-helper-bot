@@ -4,8 +4,8 @@
 
 A Discord bot that aims to augment or improve your online D&D 5e sessions. Currently, the helper bot has two commands to help in that respect:
 
-- `!play {themeName}`
-- `!spell {spellSlug}` - provided by the [Open5e](https://open5e.com/) API.
+- `!play {themeName}` - the bot will play a track at random into the voice channel you are currently in. This is parsed from a playlist JSON file.
+- `!spell {spellSlug}` - a spell summary message posted into the channel you are in, provided by the [Open5e](https://open5e.com/) API.
 
 The intention is to add more feature sets and improve user experience over time. If you find any issues
 
@@ -21,7 +21,7 @@ You should then be able to run the bot locally by running `npm run start`.
 
 ### Loading your playlist
 
-The playlist is a JSON file that contains the YouTube videos you want audio to be loaded from and played in the voice channel. The bot uses keys as the command identifier; each key contains an array value of strings that the bot then parses at random to select a track.
+The playlist is a JSON file that contains the YouTube videos you want audio to be loaded from and played in the voice channel you are in. The bot uses keys as the command identifier; each key contains an array value of strings that the bot then parses at random to select a track.
 
 Example:
 
