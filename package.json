@@ -1,6 +1,6 @@
 {
-  "name": "dnd-jukebox",
-  "version": "1.0.0",
+  "name": "dnd-5e-helper",
+  "version": "0.1.0",
   "description": "A Discord D&D 5e helper bot, using the open5e API",
   "main": "index.js",
   "dependencies": {
@@ -10,6 +10,7 @@
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.2",
     "opusscript": "0.0.7",
+    "yargs": "^16.0.3",
     "ytdl-core": "^2.1.7"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "esm": "^3.2.25",
     "jest": "^26.0.1",
     "rollup": "^2.15.0",
+    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-terser": "^6.1.0"
   },
   "scripts": {
@@ -38,11 +40,6 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rav-pradhan/dnd-jukebox/issues"
-  },
-  "ava": {
-    "require": [
-      "esm"
-    ]
   },
   "homepage": "https://github.com/rav-pradhan/dnd-jukebox#readme"
 }

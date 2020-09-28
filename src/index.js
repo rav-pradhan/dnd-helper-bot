@@ -1,18 +1,23 @@
 import * as Discord from 'discord.js'
 import dotenv from 'dotenv'
-import {config} from '../config'
+import { config } from '../config'
 import CommandRouter from './CommandRouter'
 import ChannelPresenter from './ChannelPresenter'
 import Jukebox from './Jukebox'
+import {argv} from 'yargs'
+import parsePlaylist from './cmd/parsePlaylist'
 
 dotenv.config()
+
 const client = new Discord.Client()
 
 let CommandHandler
 let originChannelPresenter
 let trackList = {}
 
+
 client.once('ready', async () => {
+    const fileLocation = argv.playlist ? argv.playlist : config.DEFAULT_PLAYLIST_LOCATION
     trackList = await parsePlaylist(fileLocation)
     console.log("D&D Helper ready for service.")
 })
