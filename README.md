@@ -7,7 +7,7 @@ A Discord bot that aims to augment or improve your online D&D 5e sessions. Curre
 - `!play {themeName}` - the bot will play a track at random into the voice channel you are currently in. This is parsed from a playlist JSON file.
 - `!spell {spellSlug}` - a spell summary message posted into the channel you are in, provided by the [Open5e](https://open5e.com/) API.
 
-The intention is to add more feature sets and improve user experience over time. If you find any issues
+The intention is to add more feature sets and improve user experience over time. This is very much early days so bugs may be present. Please create an issue if you find one.
 
 ## Set up
 
